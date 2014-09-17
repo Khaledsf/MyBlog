@@ -1,7 +1,4 @@
 require 'rack'
-require 'pry'
-require 'typhoeus'
-require 'json'
 require 'ap'
 
 class App
@@ -21,16 +18,13 @@ class App
         headers = {
             "Content-Type" => "text/html"
         }
-        body = ["<h1>404 Not Found </h1>"]
+        body = ["<h1>404 Not Found</h1>"]
 
-        case env["PATH_INFO"]
-
-        when "/"
+        if env["PATH_INFO"] == "/"
             status_code = 200
             body = [File.open(File.expand_path((File.dirname(__FILE__))) + "/public/index.html", "rb").read]
         else
             path = File.expand_path("#{File.dirname(__FILE__)}/public/#{env['PATH_INFO']}")
-            puts "Requesting #{path}"
             if File.exists?(path)
                 status_code = 200
                 body = [File.open(path, "rb").read]
