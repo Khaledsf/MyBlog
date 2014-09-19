@@ -45,3 +45,9 @@ ul a{
 h2{
 	text-align: center;
 }
+.loginbox{
+	width: 150px;
+	height: 250px;
+	margin-right: auto;
+	margin-left: auto;
+}
