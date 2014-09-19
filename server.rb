@@ -54,12 +54,9 @@ class App
                 response.body = ["<h1>401 Unauthorized</h1>"]
             end
         elsif env["PATH_INFO"] == "/posts/new"
-            # Execute a few inserts
-            ap req.params
-            post = req.params['post'].sub("'", "\'")
-            post = req.params['post'].sub('"', '\"')
-            @db.execute "insert into posts(title,post) values ('#{req.params['title']}', '#{post}')"
-            response = renderIndex(req)
+            @db.execute "insert into posts(title,post) values (?, ?)", req.params['title'], req.params['post']
+
+            response.redirect("/")
         end
 
         response.finish
@@ -73,7 +70,6 @@ class App
         response.status = 200
         response["Content-Type"] = "text/html"
         response.body = [renderer.result({posts: @posts})]
-        # response.body = [File.open("public/index.html", "rb").read]
         response
     end
 end
