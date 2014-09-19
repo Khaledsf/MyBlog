@@ -12,13 +12,22 @@
 				<li><a href="#">Theme</a></li>
 				<li><a href="#">Link</a></li>
 				<li><a href="#">Contact</a></li>
-				<li><a href="#">Log in</a></li>
+				<li><a href="login.html">Log in</a></li>
 			</ul>
 		</div>
 	</div>	
 	
 	<div class="logo">
 	</div>
+
+	<% posts.each do |post| %>
+	<div class="mainbox">
+    	<div>
+    		<h2><%= post[1] %></h2>
+    		<p><%= post[2] %></p>
+    	</div>
+    </div>
+    <% end %>
 	
 	<div class="mainbox">
     	<div>
